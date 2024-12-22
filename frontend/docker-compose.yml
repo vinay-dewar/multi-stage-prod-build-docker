@@ -1,0 +1,22 @@
+version: '4'
+services:
+  web:  # this is the single service     
+    build:
+      context: .    # folder where docker file present
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    volumes:
+      - /app/node_modules  # Dont map this folder,this folder will not check while running the sevice
+      - .:/app   # this will . ( local dir or folder) and /app in container  
+                # as we are mapping the volume so need to to add the COPY . . command in the  dockerfile
+                # but we can keep  this
+                # this is for the quick changes are we are doing i the file rather than unneccessry builds. 
+  tests:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]

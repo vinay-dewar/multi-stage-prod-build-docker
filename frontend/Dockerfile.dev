@@ -1,0 +1,14 @@
+FROM node:lts-alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+
+RUN npm install
+
+CMD [ "npm", "run","start" ]
+
+
+### build this using below command
+    # docker build -f Dockerfile.dev .
+### .dockerignore file mention the file name /folders
